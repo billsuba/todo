@@ -132,7 +132,7 @@ ul li:hover {
 .task-list {
 	display: flex;
 	flex-direction: column;
-	gap: 3px;
+	gap: 4px;
 }
 
 .item {
@@ -153,6 +153,8 @@ ul li:hover {
 }
 
 .checkbox {
+	width: 1.5rem;
+	height: 1.5rem;
 }
 
 .item textarea {
