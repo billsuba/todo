@@ -1,5 +1,27 @@
+// Heading
+const nameInput = document.querySelector("#name");
+
+nameInput.value = localStorage.getItem("name") || "";
+
+nameInput.addEventListener("change", (e) => {
+	localStorage.setItem("name", e.target.value);
+});
+
+nameInput.addEventListener("keypress", (e) => {
+	if (e.key === "Enter") {
+		nameInput.blur();
+	}
+});
+
 // Get items from local storage
 const itemsArray = JSON.parse(localStorage.getItem("items")) || [];
+
+// Reset
+const reset = document.querySelector("#reset");
+reset.addEventListener("click", () => {
+	window.localStorage.clear();
+	location.reload();
+});
 
 // Add item on button click or Enter key press
 const addItem = () => {
@@ -16,8 +38,13 @@ const addItem = () => {
 		return;
 	}
 
-	// Add item to array and local storage
-	itemsArray.push(item.value);
+	// Add item to array and local
+	const itemsObj = {
+		item: item.value,
+		isCompleted: false,
+	};
+
+	itemsArray.push(itemsObj);
 	localStorage.setItem("items", JSON.stringify(itemsArray));
 
 	// Reset input text
@@ -35,13 +62,29 @@ document.querySelector("#item").addEventListener("keypress", (e) => {
 
 // Display items on page
 function displayItems() {
+	// Count
+	const remaining = document.querySelector("#remaining");
+	const completed = document.querySelector("#completed");
+	const total = document.querySelector("#total");
+
+	let numOfCompleted = 0;
+
+	itemsArray.forEach((el) => {
+		if (el.isCompleted === true) numOfCompleted++;
+	});
+
+	remaining.innerText = itemsArray.length - numOfCompleted;
+	completed.innerText = numOfCompleted;
+	total.innerText = itemsArray.length;
+
 	const taskList = document.querySelector(".task-list");
 	taskList.innerHTML = itemsArray
 		.map(
 			(el) => `
     <div class="item">
       <div class="input-controller">
-        <textarea disabled>${el}</textarea>
+				<input type="checkbox" class="checkbox">
+        <textarea disabled>${el.item}</textarea>
         <div class="edit-controller">
           <i class="fa-solid fa-ellipsis editBtn"></i>
         </div>
@@ -74,6 +117,7 @@ function displayItems() {
 			editBtn.classList.remove("editBtn");
 			editBtn.classList.add("cancelBtn");
 			updateController.style.display = "block";
+			editBtn.style.opacity = "1";
 			input.disabled = false;
 
 			const cancelBtn = item.querySelector(".cancelBtn");
@@ -86,10 +130,30 @@ function displayItems() {
 
 			const saveBtn = item.querySelector(".saveBtn");
 			saveBtn.addEventListener("click", () => {
-				itemsArray[i] = input.value;
+				itemsArray[i].item = input.value;
 				localStorage.setItem("items", JSON.stringify(itemsArray));
 				displayItems();
 			});
+		});
+
+		// Checkbox
+		const checkbox = item.querySelector(".checkbox");
+
+		if (itemsArray[i].isCompleted) {
+			checkbox.checked = true;
+			input.style.textDecoration = "line-through";
+		}
+
+		checkbox.addEventListener("change", () => {
+			if (checkbox.checked) {
+				itemsArray[i].isCompleted = true;
+				displayItems();
+			} else {
+				itemsArray[i].isCompleted = false;
+				input.style.textDecoration = "none";
+				displayItems();
+			}
+			localStorage.setItem("items", JSON.stringify(itemsArray));
 		});
 	});
 }
@@ -97,4 +161,8 @@ function displayItems() {
 // Display items on page when window loads
 window.onload = function () {
 	displayItems();
+
+	nameInput.value === ""
+		? nameInput.focus()
+		: document.querySelector("#item").focus();
 };
