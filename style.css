@@ -1,0 +1,203 @@
+:root {
+	--dark: rgb(55, 55, 55);
+	--darkdark: rgb(25, 25, 25, 0.8);
+	--light: rgb(255, 255, 255);
+	--darklight: rgb(240, 240, 240);
+	--shadowdark: rgba(0, 0, 0, 0.1);
+}
+
+/* Reset default browser styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+	background-attachment: fixed;
+	background-size: cover;
+	background-image: url("background.webp");
+	background-color: var(--dark);
+}
+
+/* Set basic styles for container */
+.container {
+	max-width: 1000px;
+	width: 80vw;
+	margin: 4em auto;
+}
+
+/* Style header */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+}
+
+input {
+	border: none;
+	outline: none;
+}
+
+#name {
+	flex: 1;
+	min-width: 0;
+	font-size: 3.5rem;
+	font-weight: bold;
+	padding-right: 1em;
+	background-color: transparent;
+	color: var(--light);
+	letter-spacing: 1px;
+	text-shadow: 0 0 10px var(--shadowdark);
+}
+
+#reset {
+	color: var(--light);
+	padding: 0 1.2rem;
+	font-size: 1.6rem;
+	cursor: pointer;
+	transition: 0.15s ease-in-out;
+	text-shadow: 0 0 10px var(--shadowdark);
+}
+
+#reset:hover {
+	transform: scale(1.1);
+}
+
+/* Style task input */
+.task-input {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.5rem;
+	padding: 0.2rem 1rem;
+	border-radius: 4px;
+	background-color: var(--darkdark);
+	box-shadow: 0 0 10px var(--shadowdark);
+}
+
+.task-input input[type="text"] {
+	flex: 1;
+	margin-left: 10px;
+	padding: 0.6rem;
+	font-size: 1.2rem;
+	background-color: transparent;
+	color: var(--light);
+	letter-spacing: 1px;
+}
+
+input[type="text"]::placeholder {
+	color: var(--darklight);
+}
+
+.task-input i {
+	font-size: 1.6rem;
+	color: var(--light);
+	cursor: pointer;
+	transition: 0.15s ease-in-out;
+}
+
+.task-input i:hover {
+	transform: scale(1.1);
+}
+
+ul {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 1.5rem;
+	list-style: none;
+}
+
+ul li {
+	background-color: var(--darkdark);
+	color: var(--light);
+	padding: 0.3rem 0.8rem;
+	display: flex;
+	justify-content: space-between;
+	border-radius: 4px;
+	font-size: 0.9rem;
+	letter-spacing: 1px;
+	gap: 1rem;
+	transition: 0.15s ease-in-out;
+	cursor: default;
+	box-shadow: 0 0 10px var(--shadowdark);
+}
+
+ul li:hover {
+	transform: scale(1.05);
+}
+
+/* Style task list */
+.task-list {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.7rem 1.3rem;
+	border-radius: 4px;
+	background-color: var(--light);
+	box-shadow: 0 0 10px var(--shadowdark);
+}
+
+.item .input-controller {
+	flex: 1;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.checkbox {
+}
+
+.item textarea {
+	flex: 1;
+	margin: 0;
+	padding: 10px;
+	border: none;
+	font-size: 1.2rem;
+	color: var(--dark);
+	background-color: transparent;
+	resize: none;
+	outline: none;
+	letter-spacing: 1px;
+}
+
+.item .editBtn,
+.item .cancelBtn {
+	opacity: 0;
+	font-size: 1.6rem;
+	color: var(--dark);
+	cursor: pointer;
+	margin-right: 0.5rem;
+	transition: 0.15s ease-in-out;
+}
+
+.item:hover .editBtn,
+.item:hover .cancelBtn {
+	opacity: 1;
+}
+
+.editBtn:hover,
+.cancelBtn:hover {
+	transform: scale(1.1);
+}
+
+.saveBtn,
+.deleteBtn {
+	margin-left: 0.5rem;
+	font-size: 1.6rem;
+	color: var(--dark);
+	cursor: pointer;
+	transition: 0.15s ease-in-out;
+}
+
+.saveBtn:hover,
+.deleteBtn:hover {
+	transform: scale(1.1);
+}
