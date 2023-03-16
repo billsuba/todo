@@ -9,7 +9,7 @@ nameInput.addEventListener("change", (e) => {
 
 nameInput.addEventListener("keypress", (e) => {
 	if (e.key === "Enter") {
-		nameInput.blur();
+		document.querySelector("#item").focus();
 	}
 });
 
@@ -86,12 +86,12 @@ function displayItems() {
 				<input type="checkbox" class="checkbox">
         <textarea disabled>${el.item}</textarea>
         <div class="edit-controller">
-          <i class="fa-solid fa-ellipsis editBtn"></i>
+          <i class="fa-solid fa-ellipsis-vertical editBtn"></i>
         </div>
       </div>
       <div class="update-controller" style="display:none">
-        <button class="saveBtn">Save</button>
-        <button class="deleteBtn">Delete</button>
+				<i class="fa-solid fa-floppy-disk saveBtn"></i>
+        <i class="fa-solid fa-trash deleteBtn"></i>
       </div>
     </div>
     `
