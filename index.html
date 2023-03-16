@@ -15,14 +15,20 @@
 	<body>
 		<div class="container">
 			<header>
-				<h1>Today</h1>
+				<input type="text" id="name" placeholder="Today" />
+				<button id="reset">reset</button>
 			</header>
 
 			<main>
-				<div class="task-input">
+				<form class="task-input">
 					<i class="fa-solid fa-plus" id="add-btn"></i>
 					<input type="text" id="item" placeholder="Add a Task" />
-				</div>
+				</form>
+				<ul>
+					<li>Remaining <span id="remaining"></span></li>
+					<li>Completed <span id="completed"></span></li>
+					<li>Total <span id="total"></span></li>
+				</ul>
 				<div class="task-list"></div>
 			</main>
 		</div>
